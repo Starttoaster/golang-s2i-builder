@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -eo pipefail
+
+echo " -----> Set GOPATH and PATH vars" 
+export GOPATH=/opt/app-root 
+export PATH=$PATH:/usr/local/go/bin
+
+echo " -----> Move HTTP server files into place."
+fix-permissions /opt/app-root
+mv /tmp/src/* /opt/app-root/src/
+cd /opt/app-root/src && go build -o GOBINARY
